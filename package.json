@@ -2,14 +2,11 @@
   "name": "send-wapp-panel",
   "private": true,
   "version": "1.0.0",
-  "scripts": {
-    "prettier": "onchange '**/*.{js,css,scss,jsx}' -- prettier --write {{changed}} && git add {{changed}}"
-  },
+  "repository": "https://github.com/weblite-wapps/send-wapp-panel.git",
+  "author": "Amir.H Ebrahimi <amirhosseinebrahimi77@gmail.com>",
   "workspaces": [
     "packages/*"
   ],
-  "repository": "https://github.com/weblite-wapps/send-wapp-panel.git",
-  "author": "Amir.H Ebrahimi <amirhosseinebrahimi77@gmail.com>",
   "devDependencies": {
     "eslint": "^7.22.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -20,15 +17,21 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.23.1",
-    "husky": "^5.2.0",
-    "pretty-quick": "^3.1.0",
+    "@commitlint/cli": "^12.0.1",
+    "@commitlint/config-conventional": "^12.0.1",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.4",
     "prettier": "^2.2.1"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "commit-msg": "npx --no-install commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md,html,css,scss}": "prettier --write",
+    "*.{js,jsx,ts,tsx}!json": "eslint"
   },
   "license": "BSD2"
 }
-
